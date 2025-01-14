@@ -3,67 +3,37 @@ import Header from "./Header";
 import { PropertyCard } from "./PropertyCard";
 import { Search, MapPin, Filter, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getListings } from "@/api/listings";
 
 const Listings = () => {
-  const [properties] = useState([
-    {
-      id: 1,
-      title: "Oceanfront Villa",
-      image: "/api/placeholder/400/400",
-      price: 350,
-      rating: 4.9,
-      isGuestFavorite: true,
-    },
-    {
-      id: 2,
-      title: "Mountain Cabin",
-      image: "/api/placeholder/400/400",
-      price: 200,
-      rating: 4.8,
-      isGuestFavorite: false,
-    },
-    {
-      id: 3,
-      title: "Desert Oasis",
-      image: "/api/placeholder/400/400",
-      price: 275,
-      rating: 4.95,
-      isGuestFavorite: true,
-    },
-    {
-      id: 4,
-      title: "City Loft",
-      image: "/api/placeholder/400/400",
-      price: 150,
-      rating: 4.7,
-      isGuestFavorite: false,
-    },
-    {
-      id: 5,
-      title: "Lakeside Cottage",
-      image: "/api/placeholder/400/400",
-      price: 225,
-      rating: 4.85,
-      isGuestFavorite: true,
-    },
-  ]);
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["listings"],
+    queryFn: getListings,
+  });
+
+  if (isPending) return <h2>"Loading..."</h2>;
+
+  if (error) return "An error has occurred: " + error.message;
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
       <main className="px-20 pt-44 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {properties.map((property) => (
+          {data.map((property) => (
             <PropertyCard
               key={property.id}
-              image={property.image}
+              image={
+                "https://a0.muscache.com/im/pictures/miso/Hosting-624602582936764924/original/f7625ee5-6e4c-4a91-868f-6544dee34107.jpeg?im_w=720&im_format=avif"
+              }
               title={property.title}
               location="Santa Cruz, California"
               type="Beach and ocean views"
-              price={property.price}
-              rating={property.rating}
+              price={property.price_per_night}
+              rating={4.8}
               dates="Dec 1-6"
-              isGuestFavorite={property.isGuestFavorite}
+              isGuestFavorite={true}
             />
           ))}
         </div>

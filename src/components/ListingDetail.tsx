@@ -50,7 +50,6 @@ const ListingDetail = () => {
       { icon: <Tv />, name: '65" HDTV' },
       { icon: <Utensils />, name: "Full kitchen" },
       { icon: <Coffee />, name: "Coffee maker" },
-      { icon: <Pool />, name: "Private pool" },
     ],
     photos: Array(6).fill("/api/placeholder/800/600"), // Placeholder images
   };
