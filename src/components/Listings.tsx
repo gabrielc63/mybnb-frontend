@@ -21,16 +21,16 @@ const Listings = () => {
       <Header />
       <main className="px-20 pt-44 pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {data.map((property) => (
+          {data.data.map((property) => (
             <PropertyCard
               key={property.id}
               image={
                 "https://a0.muscache.com/im/pictures/miso/Hosting-624602582936764924/original/f7625ee5-6e4c-4a91-868f-6544dee34107.jpeg?im_w=720&im_format=avif"
               }
-              title={property.title}
+              title={property.attributes.title}
               location="Santa Cruz, California"
               type="Beach and ocean views"
-              price={property.price_per_night}
+              price={property.attributes.price_per_night}
               rating={4.8}
               dates="Dec 1-6"
               isGuestFavorite={true}
