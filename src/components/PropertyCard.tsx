@@ -1,8 +1,10 @@
 import { Card } from "./ui/card";
 import { Heart } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface PropertyCardProps {
+  id: number;
   title: string;
   location: string;
   type: string;
@@ -14,6 +16,7 @@ interface PropertyCardProps {
 }
 
 export function PropertyCard({
+  id,
   title,
   location,
   type,
@@ -24,10 +27,14 @@ export function PropertyCard({
   isGuestFavorite = false,
 }: PropertyCardProps) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="group cursor-pointer">
-      <div className="relative aspect-square overflow-hidden rounded-xl">
+      <div
+        className="relative aspect-square overflow-hidden rounded-xl"
+        onClick={() => navigate(`/listings/${id}`)}
+      >
         <img
           src={image}
           alt={title}

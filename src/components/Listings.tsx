@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import { PropertyCard } from "./PropertyCard";
-import { Search, MapPin, Filter, User } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getListings } from "@/api/listings";
 
 const Listings = () => {
@@ -24,9 +24,8 @@ const Listings = () => {
           {data.data.map((property) => (
             <PropertyCard
               key={property.id}
-              image={
-                "https://a0.muscache.com/im/pictures/miso/Hosting-624602582936764924/original/f7625ee5-6e4c-4a91-868f-6544dee34107.jpeg?im_w=720&im_format=avif"
-              }
+              id={property.id}
+              image={property.attributes.photos_urls[0]}
               title={property.attributes.title}
               location="Santa Cruz, California"
               type="Beach and ocean views"
